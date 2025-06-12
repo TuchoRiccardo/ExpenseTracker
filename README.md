@@ -3,7 +3,7 @@ Expense tracker CLI
 El objetivo de la app es el de llevar un seguimiento de los gastos del cliente. ESta aplicacion debe permitir al usuario(cliente)
 agregar,actualizar,eliminar gastos asi como Tambien el poder ver en listas la suma total de de gastos en periodos(meses) o segun el filtro
 que eliga.
-
+https://roadmap.sh/projects/expense-tracker
 Requerimientos:
 La app debe poder ser runneada en la CLI y tener las siguientes caracteristicas:
 
