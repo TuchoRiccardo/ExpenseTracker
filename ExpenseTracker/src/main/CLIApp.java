@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 public class CLIApp {
     private static final Scanner sc=new Scanner(System.in);
@@ -55,12 +56,20 @@ public class CLIApp {
         float amount = Float.parseFloat(sc.nextLine());
 
         System.out.print("Fecha (YYYY-MM-DD): ");
-        LocalDate date = LocalDate.parse(sc.nextLine());
+        String fechaTexto=sc.nextLine();
+        LocalDate fecha;
+        try{
+            fecha=LocalDate.parse(fechaTexto);
+            
+        }catch(DateTimeParseException e){
+            System.out.println("Formato de fechaI incorrecto. Por favor use YYYY-MM-DD(Ej. 2025-05-06)");
+            return;
+        }
 
         System.out.print("Categoría (FOOD, TRANSPORT, HEALTH, ENTERTAINMENT, UTILITIES, OTHER): ");
         Categoria cat = Categoria.valueOf(sc.nextLine().toUpperCase());
 
-        manager.agregarGasto(desc, amount, date, cat);
+        manager.agregarGasto(desc, amount, fecha, cat);
         System.out.println("\u001B[32m✔ Gasto agregado.\u001B[0m");
     }
 
