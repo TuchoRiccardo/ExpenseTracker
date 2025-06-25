@@ -26,7 +26,8 @@ public class CLIApp {
                 case "4" -> deleteExpense();
                 case "5" -> viewExpensesByMonth();
                 case "6" -> setBudget();
-                case "7" -> exportCSV();
+                case "7"-> VerGastosPorCategoria(sc,manager);
+                case "8" -> exportCSV();
                 case "0" -> runeando = false;
                 default -> System.out.println("Opción no válida.");
             
@@ -44,7 +45,8 @@ public class CLIApp {
         System.out.println("4. Eliminar gasto");
         System.out.println("5. Ver gastos por mes");
         System.out.println("6. Establecer presupuesto mensual");
-        System.out.println("7. Exportar gastos a CSV");
+        System.out.println("7. Ver gastos por categoria");
+        System.out.println("8. Exportar gastos a CSV");
         System.out.println("0. Salir");
     }
     
@@ -158,6 +160,37 @@ public class CLIApp {
         }
     }
     
+      private static void VerGastosPorCategoria(Scanner sc, ExpenseManager manager){
+          System.out.println("Ingrese la categoria por favor: ");
+          
+          String nombreCategoria=sc.nextLine().trim();
+          
+          //Convertir el string en un objeto de la clase categoria
+          
+          Categoria categoria;
+          
+          try{
+          categoria=Categoria.valueOf(nombreCategoria);
+          }catch(IllegalArgumentException e){
+              System.out.println("X categoria invalida");
+              return;
+          }
+          
+          List<Expense> filtrados=manager.getExpensesByCategoria(categoria);
+          
+          if(filtrados.isEmpty()){
+              System.out.println("No hay gastos registrados en la categoria "+categoria+" .");
+          }else{
+          System.out.println("📂 Gastos en la categoría '" + categoria + "':");
+        for (Expense e : filtrados) {
+            System.out.printf("- %s | %.2f | %s\n", e.getDescripcion(), e.getMonto(), e.getDate());
+        }
+          
+          }
+      
+      
+      
+      }
     
     
     
